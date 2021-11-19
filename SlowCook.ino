@@ -87,8 +87,9 @@
 
 
 //#define USE_MAX6675
-#define USE_DHT
+//#define USE_DHT
 //#define USE_ADC
+#define USE_MAX31865
 
 #define SerialSpeed 115200
 #define INTERVAL_1_DAY 60 * 60 * 24 *1000 //86400000///24  // 1day => 24*60*60*1000
