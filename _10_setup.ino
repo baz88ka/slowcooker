@@ -35,4 +35,7 @@ void setup()
 #ifdef USE_DHT
   dht.begin();
 #endif
+#ifdef USE_MAX31865
+  thermo.begin(MAX31865_2WIRE);
+#endif
 }
