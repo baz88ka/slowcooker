@@ -40,6 +40,13 @@ int sensorPin = A0;
 MAX6675 ktc(ktcCLK, ktcCS, ktcSO);
 #endif
 
+#ifdef USE_MAX31865
+#include <Adafruit_MAX31865.h>
+#define RREF      430.0
+#define RNOMINAL  100.0
+Adafruit_MAX31865 thermo = Adafruit_MAX31865(15);
+#endif
+
 //This function computes the new value for the ON time of the system
 //This is the return value from this function
 int computePID(float spPID)
@@ -88,6 +95,10 @@ int computePID(float spPID)
 
 #ifdef USE_MAX6675
     currentHeat = ktc.readCelsius() + AppConfig.PID[cal]; //readIronTemp(0, 1,spPID); //get the current temp of the iron
+#endif
+     
+#ifdef USE_MAX31865
+    currentHeat = thermo.temperature(RNOMINAL, RREF) + AppConfig.PID[cal]; //readIronTemp(0, 1,spPID); //get the current temp of the iron
 #endif
     if (isnan(currentHeat))
     {
